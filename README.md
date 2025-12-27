@@ -657,6 +657,7 @@ docker-compose up --build
 📋 دستورات مفید
 دستور	توضیح
 docker-compose up --build	ساخت و اجرا
+docker-compose up -d --build
 docker-compose down	توقف
 docker-compose up -d	اجرا در پس‌زمینه
 docker-compose logs -f	مشاهده لاگ‌ها
