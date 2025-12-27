@@ -1,0 +1,32 @@
+services:
+  # سرویس بک‌اند
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: user-form-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./Backend/.env
+    networks:
+      - user-form-network
+
+  # سرویس فرانت‌اند
+  frontend:
+    build:
+      context: ./FrontEnd
+      dockerfile: Dockerfile
+    container_name: user-form-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - user-form-network
+
+networks:
+  user-form-network:
+    driver: bridge
