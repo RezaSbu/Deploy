@@ -1,0 +1,29 @@
+-- ایجاد جدول کاربران در Supabase
+-- این کد SQL را در قسمت SQL Editor در Supabase اجرا کنید
+
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
+    full_name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    age INTEGER NOT NULL
+);
+
+-- اضافه کردن امنیت بیشتر با RLS (Row Level Security)
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+
+-- سیاست عمومی برای خواندن داده‌ها (فقط برای توسعه)
+CREATE POLICY "Allow public read access" ON users
+    FOR SELECT USING (true);
+
+-- سیاست عمومی برای درج داده‌ها
+CREATE POLICY "Allow public insert access" ON users
+    FOR INSERT WITH CHECK (true);
+
+-- سیاست عمومی برای به‌روزرسانی داده‌ها
+CREATE POLICY "Allow public update access" ON users
+    FOR UPDATE USING (true);
+
+-- سیاست عمومی برای حذف داده‌ها
+CREATE POLICY "Allow public delete access" ON users
+    FOR DELETE USING (true);
